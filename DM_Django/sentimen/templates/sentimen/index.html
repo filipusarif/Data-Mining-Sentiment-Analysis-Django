@@ -1,0 +1,116 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Sentimen</title>
+		<link rel="icon" type="image/x-icon" href="{% static "asset/image/icon.png" %}">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
+		<link rel = "stylesheet" type = "text/css" href = "https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"/>
+		{% tailwind_css %}
+	</head>
+
+	<body class="bg-white w-screen h-fit overflow-x-hidden">
+		{% include "snippets/navbar.html" %}
+		<section class=" container mx-auto  bg-white h-screen w-screen pt-[50px]">
+			<h1 class="text-center text-[200%] mb-10">Sentimen Analisis Naive Bayes Classification</h1>
+			
+			<div>
+				<!-- <h1>{{ textPredict }}</h1> -->
+				<!-- <h1>{{ sentimenPredict }}</h1> -->
+				<div>
+					<h1>matrix</h1>
+					{% for x in matrix %}
+						<p>{{ x }}</p>
+					{% endfor %}
+				</div>
+				<div>
+					<h1>report</h1>
+					<p>{{ report }}</p>
+				</div>
+				<div>
+					<h1>akurasi</h1>
+					<p>{{ akurasi }}</p>
+				</div>
+			</div>
+			{% if textPredict %}
+			<div class="table-responsive">
+				<table class="w-full border-collapse border-[1px] border-black" id="myTable2">
+					<thead>
+						<tr class="border-[1px] border-black">
+							<th class="w-[3%] border-[1px] border-black text-center">no</th>
+							<th class="w-[50%] border-[1px] border-black">Text</th>
+							<th class="w-[10%] border-[1px] border-black">Sentimen</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="w-[3%] border-[1px] border-black text-center">1</td> <!-- menggunakan item.full_text untuk mendapatkan nilai dari kolom full_text -->
+							<td class="w-[50%] border-[1px] border-black">{{ textPredict}}</td> <!-- menggunakan item.full_text untuk mendapatkan nilai dari kolom full_text -->
+							<td class="w-[10%] border-[1px] border-black text-center">{{ sentimenPredict }}</td> <!-- menggunakan item.Sentiment untuk mendapatkan nilai dari kolom Sentiment -->
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			{% endif %}
+			{% if testingTable %}
+			<div class="table-responsive">
+				<table class="w-full border-collapse border-[1px] border-black" id="myTable2">
+					<thead>
+						<tr class="border-[1px] border-black">
+							<th class="w-[3%] border-[1px] border-black text-center">no</th>
+							<th class="w-[50%] border-[1px] border-black">Text</th>
+							<th class="w-[10%] border-[1px] border-black">Sentimen</th>
+						</tr>
+					</thead>
+					<tbody>
+						
+							{% for item in testingTable %} <!-- menggunakan nama variabel yang dikirimkan dari views.py -->
+								<tr>
+									<td class="w-[3%] border-[1px] border-black text-center">{{ forloop.counter }}</td> <!-- menggunakan item.full_text untuk mendapatkan nilai dari kolom full_text -->
+									<td class="w-[50%] border-[1px] border-black">{{ item.testText }}</td> <!-- menggunakan item.full_text untuk mendapatkan nilai dari kolom full_text -->
+									<td class="w-[10%] border-[1px] border-black text-center">{{ item.sentimen }}</td> <!-- menggunakan item.Sentiment untuk mendapatkan nilai dari kolom Sentiment -->
+								</tr>
+							{% endfor %}
+						
+					</tbody>
+				</table>
+			</div>
+			{% endif %}
+			<div class="table-responsive">
+				<table class="w-full border-collapse border-[1px] border-black" id="myTable">
+					<thead>
+						<tr class="border-[1px] border-black">
+							<th class="w-[3%] border-[1px] border-black text-center">no</th>
+							<th class="w-[50%] border-[1px] border-black">Text</th>
+							<th class="w-[10%] border-[1px] border-black">Sentimen</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for item in data_sentimen %} <!-- menggunakan nama variabel yang dikirimkan dari views.py -->
+							<tr>
+								<td class="w-[3%] border-[1px] border-black text-center">{{ forloop.counter }}</td> <!-- menggunakan item.full_text untuk mendapatkan nilai dari kolom full_text -->
+								<td class="w-[50%] border-[1px] border-black">{{ item.text }}</td> <!-- menggunakan item.full_text untuk mendapatkan nilai dari kolom full_text -->
+								<td class="w-[10%] border-[1px] border-black text-center">{{ item.sentimen }}</td> <!-- menggunakan item.Sentiment untuk mendapatkan nilai dari kolom Sentiment -->
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</section>
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+		<script src = "https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
+		<script>
+			let table = new DataTable('#myTable');
+			let table2 = new DataTable('#myTable2');
+			// new DataTable('#myTable', {
+			// 	// dom: '<"toolbar">frtip'
+			// });
+			
+			// document.querySelector('div.toolbar').innerHTML = '<b>Custom tool bar! Text/images etc.</b>';
+		</script>
+	</body>
+</html>
