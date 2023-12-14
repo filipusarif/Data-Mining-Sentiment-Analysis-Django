@@ -19,8 +19,8 @@
 			
 			<div>
 				<!-- <h1>{{ textPredict }}</h1> -->
-				<!-- <h1>{{ sentimenPredict }}</h1> -->
-				<div>
+				<!-- <h1>{{ countWord }}</h1> -->
+				<!-- <div>
 					<h1>matrix</h1>
 					{% for x in matrix %}
 						<p>{{ x }}</p>
@@ -29,7 +29,7 @@
 				<div>
 					<h1>report</h1>
 					<p>{{ report }}</p>
-				</div>
+				</div> -->
 				<div>
 					<h1>akurasi</h1>
 					<p>{{ akurasi }}</p>
@@ -79,7 +79,7 @@
 				</table>
 			</div>
 			{% endif %}
-			<div class="table-responsive">
+			<div class="table-responsive -z-10">
 				<table class="w-full border-collapse border-[1px] border-black" id="myTable">
 					<thead>
 						<tr class="border-[1px] border-black">
@@ -99,7 +99,21 @@
 					</tbody>
 				</table>
 			</div>
+			<div class="w-[60%] bg-black">
+				{{ sentimenDataVisual | safe }}
+			</div>
+			<div class="w-[60%] bg-black">
+				{{ wordDataVisual | safe }}
+			</div>
+			<div class="w-[60%] bg-black">
+				{{ trainDataVisual | safe }}
+			</div>
+			<div class="w-[60%] bg-black">
+				{{ reportDataVisual | safe }}
+			</div>
+			<!-- <img src="{% static "asset/visual/sentimen.png" %}" alt=""> -->
 		</section>
+		
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 		<script src = "https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
@@ -111,6 +125,8 @@
 			// });
 			
 			// document.querySelector('div.toolbar').innerHTML = '<b>Custom tool bar! Text/images etc.</b>';
+
+			
 		</script>
 	</body>
 </html>
