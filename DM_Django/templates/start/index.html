@@ -36,53 +36,67 @@
 		  </style>
 	</head>
 
-	<body class="bg-white w-screen h-fit overflow-x-hidden">
+	<body class="bg-[#182B2D] w-screen h-fit overflow-x-hidden">
 		{% include "snippets/navbar.html" %}
-		<section class=" bg-white h-screen w-screen grid place-items-center">
-			<form method="POST" action="" enctype="multipart/form-data">
-				{% csrf_token %}
-				<!-- drag n drop -->
-				<div class="max-w-xl">
-					<label
-						class="flex justify-center w-full h-32 px-4 transition bg-white border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
-						<span class="flex items-center space-x-2">
-							<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24"
-								stroke="currentColor" stroke-width="2">
-								<path stroke-linecap="round" stroke-linejoin="round"
-									d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-							</svg>
-							<span class="font-medium text-gray-600">
-								Drop files to Attach, or
-								<span class="text-blue-600 underline">browse</span>
+		
+		<section class=" bg-[#F5D3A6] h-[110vh] w-screen relative overflow-hidden">
+			<div class="">
+				
+				<img src="{% static "asset/background/5.png" %}" alt="" class="absolute left-0 bottom-0 w-full">
+				<img src="{% static "asset/background/4.png" %}" alt="" class="absolute left-0 -bottom-[180px] w-full">
+				<img src="{% static "asset/background/3.png" %}" alt="" class="absolute left-0 bottom-0 w-full">
+				<img src="{% static "asset/background/2.png" %}" alt="" class="absolute left-0 bottom-0 w-full">
+				<img src="{% static "asset/background/1.png" %}" alt="" class="absolute left-0 bottom-0 w-full">
+			</div>
+			<div class="container mx-auto flex flex-col items-center  pt-24 w-full h-[80vh] ">
+				<h1 class="text-[400%] font-kalnia font-bold text-[#182B2D]">Politik Dinasti</h1>
+				<p class=" text-[135%] -mt-3 font-kalnia">Sentimen Analisis Naive Bayes Klasifikasi</p>
+				<form method="POST" action="" enctype="multipart/form-data" class="z-10 mt-5">
+					<p class="font-montserrat mb-1">Upload Dataset untuk Sentimen Analisis</p>
+					{% csrf_token %}
+					<!-- drag n drop -->
+					<div class="max-w-xl">
+						<label
+							class="flex justify-center w-full h-24 px-4 transition bg-transparent border-2 border-gray-800 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
+							<span class="flex items-center space-x-1">
+								<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-bg-gray-800" fill="none" viewBox="0 0 24 24"
+									stroke="currentColor" stroke-width="2">
+									<path stroke-linecap="round" stroke-linejoin="round"
+										d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+								</svg>
+								<span class="font-medium textb-gray-800">
+									Drop File Dataset, or
+									<span class="text-blue-600 underline">browse</span>
+								</span>
 							</span>
-						</span>
-						<!-- {{ form.as_p }} -->
-						<input type="file" name="file_upload" class="hidden">
-					</label>
-				</div>
-				<input type="checkbox" name="label" value="1" id="label">
-				<label for="label">auto labeling</label>
-				<button type="submit">Kirim</button>
-			</form>
-			<button onclick="document.getElementById('myModal').showModal()" id="btn" class="py-3 px-10 bg-gray-800 text-black rounded text shadow-xl">Sentimen Analisis</button>
+							<!-- {{ form.as_p }} -->
+							<input type="file" name="file_upload" class="hidden">
+						</label>
+					</div>
+					<input type="checkbox" name="label" value="1" id="label">
+					<label for="label" class="text-[#182B2D]">Auto Labeling</label><br>
+					<button type="submit" class="py-2 px-8 bg-gray-800 text-white rounded text shadow-xl z-40 mt-2">Upload</button>
+				</form>
+				<button onclick="document.getElementById('myModal').showModal()" id="btn" class="mt-24 py-3 px-10 bg-gray-800 text-white rounded text shadow-xl z-40">Sentimen Analisis</button>
+			</div>
 		</section>
-		<section class="container mx-auto">
+		<section class="container mx-auto bg-[#182B2D]">
 			<p>jumlah record dataset : {{ jumlah }}</p>
 			<div class="table-responsive">
-			<table class="w-[100%] bg-slate-700" id="myTable" >
-				<thead>
+			<table class="w-[100%] bg-[#182B2D] text-slate-200" id="myTable" >
+				<thead class="bg-[#182B2D]">
 					<tr>
 						<th class="w-[3%] border-[1px] border-black text-center">no</th>
 						<th class="w-[50%] border-[1px] border-black">Text</th>
 						<th class="w-[10%] border-[1px] border-black">Sentimen</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody class="bg-[#182B2D]">
 					{% for item in data %}
 					<tr>
-						<td class="w-[3%] border-[1px] border-black text-center">{{ forloop.counter }}</td>
-						<td class="w-[50%] border-[1px] border-black">{{ item.text }}</td>
-						<td class="w-[10%] border-[1px] border-black text-center">{{ item.sentimen }}</td>
+						<td class="w-[3%] border-[1px] bg-[#182B2D] border-black text-center">{{ forloop.counter }}</td>
+						<td class="w-[50%] border-[1px] bg-[#182B2D] border-black">{{ item.text }}</td>
+						<td class="w-[10%] border-[1px] bg-[#182B2D] border-black text-center">{{ item.sentimen }}</td>
 					</tr>
 					{% endfor %}
 				</tbody>
@@ -96,6 +110,15 @@
 		<script src = "https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
 		<script>
 			let table = new DataTable('#myTable');
+
+			window.onscroll = () => {
+				const nav = document.querySelector('#navBar');
+				if(this.scrollY <= 10){
+					nav.className = 'text-[#182B2D] bg-transparent transition ease-in-out delay-200  fixed flex items-center w-screen h-12  z-50';
+				}else{
+					nav.className = ' text-slate-200 bg-[#182B2D] transition ease-in-out delay-200 fixed flex items-center w-screen h-12  z-50';
+				} 
+			};
 			// Initialization for ES Users
 			// new DataTable('#myTable', {
 			// 	// dom: '<"toolbar">frtip'

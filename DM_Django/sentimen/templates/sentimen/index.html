@@ -12,9 +12,9 @@
 		{% tailwind_css %}
 	</head>
 
-	<body class="bg-white w-screen h-fit overflow-x-hidden">
+	<body class="w-screen h-fit overflow-x-hidden bg-[#182B2D] text-slate-200">
 		{% include "snippets/navbar.html" %}
-		<section class=" container mx-auto  bg-white h-screen w-screen pt-[50px]">
+		<section class=" container mx-auto  bg-[#182B2D] h-screen w-screen pt-[50px]">
 			<h1 class="text-center text-[200%] mb-10">Sentimen Analisis Naive Bayes Classification</h1>
 			
 			<div>
@@ -35,6 +35,7 @@
 					<p>{{ akurasi }}</p>
 				</div>
 			</div>
+			
 			{% if textPredict %}
 			<div class="table-responsive">
 				<table class="w-full border-collapse border-[1px] border-black" id="myTable2">

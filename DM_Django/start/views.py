@@ -54,12 +54,14 @@ def index(request):
     if request.method == 'POST' and request.POST.get('textTest', None):
         DataTesting.objects.all().delete()
         data = request.POST.get('textTest')
-        if request.POST['textTest'] == '1':
-            analisis()
-            return redirect(f'/Sentimen/?text={data}')
-        else:
-            preprocessing()
-            return redirect(f'/Sentimen/?text={data}')
+        preprocessing()
+        return redirect(f'/Sentimen/?text={data}')
+        # if request.POST['textTest'] == '1':
+        #     analisis()
+        #     return redirect(f'/Sentimen/?text={data}')
+        # else:
+        #     preprocessing()
+        #     return redirect(f'/Sentimen/?text={data}')
     
     if request.method == 'POST' and request.FILES.get('testCSV',None):
         DataTesting.objects.all().delete()

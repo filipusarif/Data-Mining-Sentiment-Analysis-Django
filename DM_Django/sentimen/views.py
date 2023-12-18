@@ -106,7 +106,7 @@ def index(request):
     figSentimen = px.pie(df, names='sentimen', title = 'Sentimen', width=800, height=400)
     figSentimen.update_layout(
         margin=dict(l=20, r=20, t=20, b=20),
-        paper_bgcolor="#ff0000",
+        paper_bgcolor="#182B2D",
     )
     chart = figSentimen.to_html()
     data_dict = df.to_dict(orient='records')
@@ -130,6 +130,10 @@ def index(request):
     figWord.update_layout(
         xaxis_title="Kata",
         yaxis_title="Jumlah",
+    )
+    figWord.update_layout(
+        margin=dict(l=20, r=20, t=20, b=20),
+        paper_bgcolor="#182B2D",
     )
     chartWord = figWord.to_html()
 
@@ -165,7 +169,10 @@ def index(request):
         xaxis_title='Predicted Label',
         yaxis_title='True Label',
     )
-
+    figConfusionMatrix.update_layout(
+        margin=dict(l=20, r=20, t=20, b=20),
+        paper_bgcolor="#182B2D",
+    )
     chartTrain = figConfusionMatrix.to_html()
 
     
@@ -181,7 +188,10 @@ def index(request):
         labels={'y': 'Score', 'x': 'Class', 'color': 'Metric'},
         title='Classification Report Metrics by Class',
     )
-
+    figClassificationReport.update_layout(
+        margin=dict(l=20, r=20, t=20, b=20),
+        paper_bgcolor="#182B2D",
+    )
     chartClassificationReport = figClassificationReport.to_html()
 
     context = {
