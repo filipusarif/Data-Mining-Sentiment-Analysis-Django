@@ -1,0 +1,72 @@
+dialog[open] {
+    animation: appear .15s cubic-bezier(0, 1.8, 1, 1.8);
+}
+
+dialog::backdrop {
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(54, 54, 54, 0.5));
+    backdrop-filter: blur(3px);
+}
+
+@keyframes appear {
+    from {
+    opacity: 0;
+    transform: translateX(-3rem);
+    }
+
+    to {
+    opacity: 1;
+    transform: translateX(0);
+    }
+} 
+
+.dataTables_length select {
+    color: #fff; /* Change to your desired text color */
+    background-color: #4CAF50; /* Change to your desired background color */
+    border: 1px solid #4CAF50; /* Change to your desired border color */
+}
+
+.dataTables_length label {
+    color: #fff;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, 
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    background-color: #182B2D!important;
+    border-radius: 5px;
+}
+
+.paginate_button {
+    color: #fff!important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, 
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: #182B2D!important;
+    color: #fff!important;
+    border: 1px;
+    border-color:#fff;
+    border-radius: 5px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.next {
+    color: #fff!important; /* Change to your desired text color */
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: #fff!important; /* Change to your desired text color */
+    background-color: #fff; /* Change to your desired background color */
+    border: 1px solid #fff; /* Change to your desired border color */
+}
+
+.dataTables_filter input {
+    background: #f8f8f8;
+    color: #333;
+    border: 1px solid #4CAF50;
+}
+
+.dataTables_filter label {
+    color: #f8f8f8;
+}
+
+.dataTables_info {
+    color: #fff!important; /* Change to your desired text color */
+}

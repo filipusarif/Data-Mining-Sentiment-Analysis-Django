@@ -109,3 +109,7 @@ def labeling(request):
     Analisis.objects.bulk_create([Analisis(**d) for d in data1])
     return redirect('/Sentimen/')
     
+def delete(request):
+    Data.objects.all().delete()
+    Analisis.objects.all().delete()
+    return redirect('/')
