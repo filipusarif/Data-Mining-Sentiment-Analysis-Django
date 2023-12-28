@@ -14,7 +14,18 @@
 	</head>
 
 	<body class="w-screen h-fit overflow-x-hidden bg-[#182B2D] text-slate-200 font-roboto">
-		{% include "snippets/navbar.html" %}
+		<section class="text-slate-200 bg-[#182B2D] transition ease-in-out delay-200 fixed flex items-center w-screen h-12  z-50" id="navBar">
+			<header class="container flex items-center justify-between mx-auto font-poppins">
+				<a href="/"><img src="" alt="">home</a>
+				<nav class="flex gap-5">
+					<a href="/" class="">Home</a>
+					<a href="/Sentimen">Sentimen</a>
+				</nav>
+				<div>
+					
+				</div>
+			</header>
+		</section>
 		<section class=" container mx-auto  bg-[#182B2D] w-screen pt-[50px]">
 			<h1 class="text-center text-[200%] mb-5">Sentimen Analisis Naive Bayes Classification</h1>
 			
@@ -86,7 +97,7 @@
 				</div>
 				{% endif %}
 				
-				<h1 class="mt-">Data Visualisasi</h1>
+				<h1 class="mt-10 text-center mb-3 text-[25px]">Data Visualisasi</h1>
 				<div class="w-[60%] flex flex-col items-center gap-5 mx-auto ">
 					{{ sentimenDataVisual | safe }}
 					{{ wordDataVisual | safe }}
@@ -126,14 +137,6 @@
 			let table = new DataTable('#myTable');
 			let table2 = new DataTable('#myTable2');
 
-			window.onscroll = () => {
-				const nav = document.querySelector('#navBar');
-				if(this.scrollY <= 10){
-					nav.className = 'text-[#182B2D] bg-transparent transition ease-in-out delay-200  fixed flex items-center w-screen h-12  z-50';
-				}else{
-					nav.className = ' text-slate-200 bg-[#182B2D] transition ease-in-out delay-200 fixed flex items-center w-screen h-12  z-50';
-				} 
-			};
 			// new DataTable('#myTable', {
 			// 	// dom: '<"toolbar">frtip'
 			// });
