@@ -29,29 +29,12 @@
 		<section class=" container mx-auto  bg-[#182B2D] w-screen pt-[50px]">
 			<h1 class="text-center text-[200%] mb-5">Sentimen Analisis Naive Bayes Classification</h1>
 			
-			<!-- <div>
-				<h1>{{ textPredict }}</h1>
-				<h1>{{ countWord }}</h1>
-				<div>
-					<h1>matrix</h1>
-					{% for x in matrix %}
-						<p>{{ x }}</p>
-					{% endfor %}
-				</div>
-				<div>
-					<h1>report</h1>
-					<p>{{ report }}</p>
-				</div>
-				<div>
-					<h1>akurasi</h1>
-					<p>{{ akurasi }}</p>
-				</div>
-			</div> -->
 			{% if status == 'none' %}
 			<div class="w-screen h-[80vh] max-h-screen grid place-items-center  -mt-28">
 				<p>Belum ada data, <a href="/">input Data?</a></p>
 			</div>
 			{% else %}
+				<p class="ml-16">Model Akurasi {{ akurasi }}</p>
 				{% if textPredict %}
 				<h1 class="ml-16">Hasil Prediksi Sentimen Analisis Naive Bayes</h1>
 				<div class="table-responsive grid place-items-center">
@@ -71,6 +54,7 @@
 						</tbody>
 					</table>
 				</div>
+				<p class="mx-16 mt-2">kesimpulan : berdasarkan model akurasi yang didapatkan {{ akurasi }} dengan hasil prediksi pada text {{ textPredict }} yaitu {{ sentimenPredict }}</p>
 				{% endif %}
 				{% if testingTable %}
 				<div class="table-responsive">
@@ -136,13 +120,6 @@
 		<script>
 			let table = new DataTable('#myTable');
 			let table2 = new DataTable('#myTable2');
-
-			// new DataTable('#myTable', {
-			// 	// dom: '<"toolbar">frtip'
-			// });
-			
-			// document.querySelector('div.toolbar').innerHTML = '<b>Custom tool bar! Text/images etc.</b>';
-
 			
 		</script>
 	</body>

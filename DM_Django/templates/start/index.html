@@ -87,7 +87,9 @@
 			</table>
 			</div>
 			{% else %}
-			<p>Belum ada Data yang diupload</p>
+			<div class="h-[50vh] grid place-items-center">
+				<p class="text-gray-200 text-center">Belum ada Data yang diupload</p>
+			</div>
 			{% endif %}
 		</section>
 		{% include 'start/modal.html' %}
@@ -106,12 +108,7 @@
 					nav.className = 'text-slate-400 bg-[#182B2D] transition ease-in-out delay-200 fixed flex items-center w-screen h-12  z-50';
 				} 
 			};
-			// Initialization for ES Users
-			// new DataTable('#myTable', {
-			// 	// dom: '<"toolbar">frtip'
-			// });
 			
-			// document.querySelector('div.toolbar').innerHTML = '<b>Custom tool bar! Text/images etc.</b>';
 		</script>
 	</body>
 </html>

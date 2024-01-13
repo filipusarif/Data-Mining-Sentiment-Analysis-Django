@@ -19,7 +19,7 @@ from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 import swifter
 
 
-# --------------------------- cleaning
+# --------------------------- cleaning -----------------------------------
 def remove_tweet_special(text):
     text = text.replace('\\t'," ").replace('\\n'," ").replace('\\u'," ").replace('\\',"")
     text = text.encode('ascii', 'replace').decode('ascii')
@@ -46,10 +46,14 @@ def remove_whitespace_multiple(text):
 def remove_singl_char(text):
     return re.sub(r"\b[a-zA-Z]\b", "", text)
 
-# NLTK word rokenize 
+# --------------------------- tokenize -----------------------------------
+
+# NLTK word tokenize 
 def word_tokenize_wrapper(text):
     return word_tokenize(text)
 
+
+# --------------------------- stemmed -----------------------------------
 # apply stemmed term to dataframe
 def get_stemmed_term(document):
     return [term_dict[term] for term in document]
@@ -68,7 +72,20 @@ list_stopwords.extend(["yg", "dg", "rt", "dgn", "ny", "d", 'klo',
                     'si', 'tau', 'tdk', 'tuh', 'utk', 'ya', 
                     'jd', 'jgn', 'sdh', 'aja', 'n', 't', 
                     'nyg', 'hehe', 'pen', 'u', 'nan', 'loh', 'rt',
-                    '&amp', 'yah'])
+                    '&amp', 'yah', 'yg', 'utk', 'cuman', 'deh', 'Btw', 'tapi', 'gua', 'gue', 'lo', 'lu',
+                    'kalo', 'trs', 'jd', 'nih', 'ntar', 'nya', 'lg', 'gk', 'ecusli', 'dpt',
+                    'dr', 'kpn', 'kok', 'kyk', 'donk', 'yah', 'u', 'ya', 'ga', 'km', 'eh',
+                    'sih', 'eh', 'bang', 'br', 'kyk', 'rp', 'jt', 'kan', 'gpp', 'sm', 'usah',
+                    'mas', 'sob', 'thx', 'ato', 'jg', 'gw', 'wkwk', 'mak', 'haha', 'iy', 'k',
+                    'tp', 'haha', 'dg', 'dri', 'duh', 'ye', 'wkwkwk', 'syg', 'btw',
+                    'nerjemahin', 'gaes', 'guys', 'moga', 'kmrn', 'nemu', 'yukkk',
+                    'wkwkw', 'klas', 'iw', 'ew', 'lho', 'sbnry', 'org', 'gtu', 'bwt',
+                    'klrga', 'clau', 'lbh', 'cpet', 'ku', 'wke', 'mba', 'mas', 'sdh', 'kmrn',
+                    'oi', 'spt', 'dlm', 'bs', 'krn', 'jgn', 'sapa', 'spt', 'sh', 'wakakaka',
+                    'sihhh', 'hehe', 'ih', 'dgn', 'la', 'kl', 'ttg', 'mana', 'kmna', 'kmn',
+                    'tdk', 'tuh', 'dah', 'kek', 'ko', 'pls', 'bbrp', 'pd', 'mah', 'dhhh',
+                    'kpd', 'tuh', 'kzl', 'byar', 'si', 'sii', 'cm', 'sy', 'hahahaha', 'weh',
+                    'dlu', 'tuhh'])
 # convert list to dictionary
 list_stopwords = set(list_stopwords)
 
@@ -95,20 +112,20 @@ class Preprocessing():
                 )
             )
         )
-        # TWEET_DATA = pd.read_csv("D:\Github\Sentiment Analysis-DMProject-Django\sentimenAnalisis\dataset\Tes1.csv")
-        # TWEET_DATA.head()
         
-
+        # -------------------------------------- cleaning --------------------------------------
         TWEET_DATA['text'] = TWEET_DATA['text'].apply(remove_tweet_special)
+        # -------------------------------------- Case Folding --------------------------------------
         TWEET_DATA['text'] = TWEET_DATA['text'].str.lower()
-
         TWEET_DATA['text'] = TWEET_DATA['text'].apply(remove_number)
         TWEET_DATA['text'] = TWEET_DATA['text'].apply(remove_punctuation)
         TWEET_DATA['text'] = TWEET_DATA['text'].apply(remove_whitespace_LT)
         TWEET_DATA['text'] = TWEET_DATA['text'].apply(remove_whitespace_multiple)
         TWEET_DATA['text'] = TWEET_DATA['text'].apply(remove_singl_char)
+        # -------------------------------------- Tokenizing --------------------------------------
         TWEET_DATA['text'] = TWEET_DATA['text'].apply(word_tokenize_wrapper)
 
+        # -------------------------------------- normalized --------------------------------------
         normalizad_word = pd.read_excel("static\dataset\input\DSnormalisasi.xlsx")
         for index, row in normalizad_word.iterrows():
             if row[0] not in normalizad_word_dict:
@@ -118,23 +135,17 @@ class Preprocessing():
         TWEET_DATA['text'].head(10)
 
 
-
-        # for document in TWEET_DATA['text']:
-        #     for term in document:
-        #         if term not in term_dict:
-        #             term_dict[term] = ' '
+        # -------------------------------------- stemming --------------------------------------
+        for document in TWEET_DATA['text']:
+            for term in document:
+                if term not in term_dict:
+                    term_dict[term] = ' '
                     
-        # print(len(term_dict))
-        # print("------------------------")
 
-        # for term in term_dict:
-        #     term_dict[term] = stemmed_wrapper(term)
-        #     print(term,":" ,term_dict[term])
-            
-        # print(term_dict)
-        # print("------------------------")
+        for term in term_dict:
+            term_dict[term] = stemmed_wrapper(term)
         
-        # TWEET_DATA['text'] = TWEET_DATA['text'].swifter.apply(get_stemmed_term)
+        TWEET_DATA['text'] = TWEET_DATA['text'].swifter.apply(get_stemmed_term)
         # print(TWEET_DATA['text'])
         
         
@@ -142,13 +153,7 @@ class Preprocessing():
 
         # ubah data frame ke numpy array
         return TWEET_DATA.to_dict(orient='records')
-        # mengubah data frame menjadi dictionary
-        # data_dict = df.to_dict(orient='records')
-
-        # Analisis.objects.all().delete()
-        # data = Data.objects.values('text', 'sentimen')
-        # Analisis.objects.bulk_create([Analisis(**d) for d in data])
-        # print(TWEET_DATA['text'].head())
+        
 
     
 
@@ -159,17 +164,17 @@ class Preprocessing():
     
 
 
-# -------------------------------------- cleaning --------------------------------------
+
 
 
                 
 
 
-# -------------------------------------- Case Folding --------------------------------------
 
 
 
-# -------------------------------------- Tokenizing --------------------------------------
+
+
 
 
 

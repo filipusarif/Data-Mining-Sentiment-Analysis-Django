@@ -39,30 +39,23 @@ def index(request):
 
         label = request.POST.get('label')
         if label == '1':
-            # return redirect('/Sentimen/')
             csv_reader = Labeling.proses(csv_reader)
 
         for row in csv_reader:
-            # Sesuaikan dengan struktur CSV Anda dan model Anda
             Data.objects.create(
                 text=row[1],
                 sentimen=row[2],
             )
-            
-        return redirect('/')  # Ganti 'success' dengan nama rute untuk halaman sukses
+        preprocessing()
+        return redirect('/')  
     
+    # predict text
     if request.method == 'POST' and request.POST.get('textTest', None):
         DataTesting.objects.all().delete()
         data = request.POST.get('textTest')
-        preprocessing()
         return redirect(f'/Sentimen/?text={data}')
-        # if request.POST['textTest'] == '1':
-        #     analisis()
-        #     return redirect(f'/Sentimen/?text={data}')
-        # else:
-        #     preprocessing()
-        #     return redirect(f'/Sentimen/?text={data}')
     
+    # predict file
     if request.method == 'POST' and request.FILES.get('testCSV',None):
         DataTesting.objects.all().delete()
         test_CSV = request.FILES['testCSV']
@@ -76,7 +69,7 @@ def index(request):
                 testText=row[1],
             )
 
-        return redirect('/Sentimen/')  # Ganti 'success' dengan nama rute untuk halaman sukses
+        return redirect('/Sentimen/')  
 
         
 
@@ -95,11 +88,6 @@ def analisis():
     data = Data.objects.values('text', 'sentimen')
     Analisis.objects.bulk_create([Analisis(**d) for d in data])
 
-def preprocessing():
-    Analisis.objects.all().delete()
-    data = Preprocessing.proses()
-    Analisis.objects.bulk_create([Analisis(**d) for d in data])
-
 def labeling(request):
     Data.objects.all().delete()
     Analisis.objects.all().delete()
@@ -108,6 +96,12 @@ def labeling(request):
     data1 = Preprocessing.proses()
     Analisis.objects.bulk_create([Analisis(**d) for d in data1])
     return redirect('/Sentimen/')
+
+def preprocessing():
+    Analisis.objects.all().delete()
+    data = Preprocessing.proses()
+    Analisis.objects.bulk_create([Analisis(**d) for d in data])
+
     
 def delete(request):
     Data.objects.all().delete()
